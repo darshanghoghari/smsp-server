@@ -1,3 +1,3 @@
 # smsp-server
 
-Society Managment System
+Society Management System
