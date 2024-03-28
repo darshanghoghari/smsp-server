@@ -35,34 +35,3 @@ const authMiddleware = async (req, res, next) => {
 };
 
 module.exports = authMiddleware;
-
-
-
-
-
-// const jwt = require('jsonwebtoken');
-// const secretKey = process.env.SECRET_KEY;
-// const createError = require('http-errors');
-
-
-// const verifyTokenFromCookie = (req, res, next) => {
-//     const authToken = req.cookies.authToken;
-
-//     if (!authToken) {
-//         throw createError(401, 'Authentication token not found');
-//     }
-//     try {
-//         // Verify the JWT token
-//         const decoded = jwt.verify(authToken, secretKey);
-
-//         // Attach decoded token to request object
-//         req.user = decoded;
-//         next();
-
-//     } catch (error) {
-//         throw createError(401, 'Authentication token not found')
-//     }
-// };
-
-
-// module.exports = { verifyTokenFromCookie };

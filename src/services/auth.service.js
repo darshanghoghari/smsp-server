@@ -34,7 +34,7 @@ const loginUser = async (user) => {
             throw HttpException(401, 'Incorrect Password')
         }
         const updateUserData = await User.findByIdAndUpdate({ _id: userDetail._id, isDelete: false }, { $set: { isActive: true } }, { new: true })
-        const token = await createToken(updateUserData);
+        const token = createToken(updateUserData);
         const userDataAndTokenData = { user: userDetail.email, token: token };
         return userDataAndTokenData;
     }
