@@ -2,9 +2,10 @@ const houseService = require('../services/house.service');
 
 const addHouseDetail = async (req, res, next) => {
     try {
+        const userData = req.user;
         const houseData = req.body;
 
-        const data = await houseService.createHouseDetail(houseData);
+        const data = await houseService.createHouseDetail(houseData, userData);
 
         res.json({ status: 200, message: 'House Detail Added successfully', data });
 
@@ -26,8 +27,9 @@ const updateHouseDetail = async (req, res, next) => {
     try {
         const houseId = req.params.houseId;
         const houseData = req.body;
+        const userData = req.user;
 
-        const data = await houseService.updateHouseDetail(houseId, houseData);
+        const data = await houseService.updateHouseDetail(houseId, houseData, userData);
 
         res.json({ status: 200, message: 'House Detail Update successfully', data });
 
@@ -38,8 +40,9 @@ const updateHouseDetail = async (req, res, next) => {
 const deleteHouseDetail = async (req, res, next) => {
     try {
         const houseId = req.params.houseId;
+        const userData = req.user;
 
-        const data = await houseService.deleteHouseDetail(houseId);
+        const data = await houseService.deleteHouseDetail(houseId, userData);
 
         res.json({ status: 200, message: 'House Detail Deleted successfully', data })
     } catch (error) {

@@ -8,8 +8,8 @@ const { ValidationError } = require('express-validation');
 //---------import file route----------------------
 const databaseConnection = require('./databases/database');
 const authRoute = require('./routes/auth.routes');
-const houseRoute = require('./routes/house.routes')
-
+const houseRoute = require('./routes/house.routes');
+const complainRoute = require('./routes/complain.routes');
 
 //------------------------------------------
 const app = express();
@@ -30,7 +30,7 @@ app.use(cookieParser())
 
 app.use('/auth', authRoute, errorMiddleware);
 app.use("/house", houseRoute, errorMiddleware);
-
+app.use("/complain", complainRoute, errorMiddleware);
 // app.use('/', (req, res) => {
 //     res.send('hello from server');
 // })//default testing route
