@@ -24,4 +24,32 @@ const getComplaintDetail = async (req, res, next) => {
         next(error)
     }
 }
-module.exports = { addComplainDetail, getComplaintDetail }
+
+const updateComplaint = async (req, res, next) => {
+    try {
+        const complainId = req.params.complainId;
+        const complainData = req.body;
+
+        const data = await complainServices.updateComplainDetail(complainId, complainData);
+
+        res.json({ status: 200, message: 'Complain Update successfully', data });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+const deleteComplaint = async (req, res, next) => {
+    try {
+        const complainId = req.params.complainId;
+
+        const data = await complainServices.deleteComplainDetail(complainId);
+
+        res.json({ status: 200, message: 'Complain Deleted successfully', data });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = { addComplainDetail, getComplaintDetail, updateComplaint, deleteComplaint };    

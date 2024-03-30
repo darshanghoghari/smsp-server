@@ -10,4 +10,22 @@ const createComplain = {
     })
 }
 
-module.exports = { createComplain }
+const updateComplain = {
+    body: Joi.object({
+        complainTitle: Joi.string().optional(),
+        complainDescription: Joi.string().optional(),
+        proofAttachment: Joi.string().optional(),
+        isResolved: Joi.boolean().optional(),
+        proofAttachment: Joi.string().optional()
+    })
+}
+
+const complainId = {
+    params: Joi.object({
+        complainId: Joi.objectId().required()
+    })
+}
+
+
+
+module.exports = { createComplain, updateComplain, complainId };
