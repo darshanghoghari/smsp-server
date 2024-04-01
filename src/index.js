@@ -11,6 +11,7 @@ const authRoute = require('./routes/auth.routes');
 const houseRoute = require('./routes/house.routes');
 const complainRoute = require('./routes/complain.routes');
 const clubBooking = require('./routes/clubBooking.routes');
+const circularNoticeRoute = require('./routes/circularNotice.routes');
 //------------------------------------------
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,7 +33,7 @@ app.use('/auth', authRoute, errorMiddleware);
 app.use("/house", houseRoute, errorMiddleware);
 app.use("/complain", complainRoute, errorMiddleware);
 app.use("/clubBooking", clubBooking, errorMiddleware);
-
+app.use("/circularNotice", circularNoticeRoute, errorMiddleware);
 //-----------Connecting Database and start server---------
 databaseConnection.then(() => {
     app.listen(port, () => {
