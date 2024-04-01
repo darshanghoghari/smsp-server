@@ -36,7 +36,7 @@ const updateHouseDetail = async (houseId, houseData, userData) => {
     if (isAdmin.userType !== "Admin") throw HttpException(409, 'Unauthorized to Update HouseDetails')
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
-    const updatedCollectionData = await houseModel.findOneAndUpdate({ _id: houseDetailId }, { ...houseData }, { new: true }).lean();
+    const updatedCollectionData = await houseModel.findOneAndUpdate({ _id: houseDetailId }, { ...houseData }, { new: true });
     if (!updatedCollectionData) {
         throw HttpException(409, 'House Detail Not Updated');
     }
@@ -51,7 +51,7 @@ const deleteHouseDetail = async (houseId, userData) => {
     if (isAdmin.userType !== "Admin") throw HttpException(409, 'Unauthorized to Remove HouseDetails')
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
-    const deletedCollectionData = await houseModel.deleteOne({ _id: houseDetailId }, { new: true }).lean();
+    const deletedCollectionData = await houseModel.findOneAndDelete({ _id: houseDetailId }, { new: true });
     if (!deletedCollectionData) {
         throw HttpException(409, 'House Detail Not Deleted');
     } else {
