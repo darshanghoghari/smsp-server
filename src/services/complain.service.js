@@ -1,4 +1,4 @@
-const { default: mongoose } = require('mongoose');
+const { mongoose } = require('mongoose');
 const complainModel = require('../models/complain.model');
 const { HttpException } = require('../exceptions/HttpsException');
 
