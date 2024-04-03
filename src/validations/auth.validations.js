@@ -15,7 +15,8 @@ const createSignup = {
                 'number.min': 'Contact number must have 10 digits',
                 'number.max': 'Contact number must have 10 digits',
             })
-            .required()
+            .required(),
+        photoProof: Joi.any().optional()
     })
 };
 

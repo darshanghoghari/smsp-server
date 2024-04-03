@@ -2,8 +2,8 @@ require('dotenv').config();
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const createError = require('http-errors');
 const { HttpException } = require('../exceptions/HttpsException');
+
 
 const createUser = async (user) => {
     const userData = user;
@@ -15,6 +15,7 @@ const createUser = async (user) => {
         const saltRound = 10;
         const hashedPassword = await bcrypt.hash(userData.password, await bcrypt.genSalt(saltRound));
         userData.password = hashedPassword;
+
 
         const newUser = new User(userData);
         const collectionData = await newUser.save();
@@ -33,7 +34,7 @@ const loginUser = async (user) => {
         if (!matchUser) {
             throw HttpException(401, 'Incorrect Password')
         }
-        const updateUserData = await User.findByIdAndUpdate({ _id: userDetail._id, isDelete: false }, { $set: { isActive: true } }, { new: true })
+        const updateUserData = await User.findByIdAndUpdate({ _id: userDetail._id, isDelete: false, isAccess: true }, { $set: { isActive: true } }, { new: true })
         const token = createToken(updateUserData);
         const userDataAndTokenData = { user: userDetail.email, token: token };
         return userDataAndTokenData;
@@ -47,6 +48,7 @@ const createToken = (user) => {
 
     return { expiresIn, token: jwt.sign(dataStoredInToken, secretKey, { expiresIn }) };
 }
+
 
 
 module.exports = { createUser, loginUser };
