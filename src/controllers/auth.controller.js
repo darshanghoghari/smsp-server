@@ -16,6 +16,7 @@ const signupUser = async (req, res, next) => {
 
         // user.photoProof = idProof;
 
+        user.photoProof = req.file?.path;
         const data = await authService.createUser(user);
 
         res.json({ status: 200, message: 'User Added successfully', data });

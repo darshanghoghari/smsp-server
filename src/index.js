@@ -6,10 +6,12 @@ const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 
+
 //---------import file route----------------------
 const errorMiddleware = require('./middlewares/error.middleware')
 const { logger, stream } = require('./utils/logger.util');
 const databaseConnection = require('./databases/database');
+const { upload } = require('./middlewares/multer.middleware');
 
 const authRoute = require('./routes/auth.routes');
 const houseRoute = require('./routes/house.routes');
@@ -38,8 +40,11 @@ app.use(cors(corsOptions));
 app.use(morgan(process.env.LOG_FORMAT || "dev", { stream }));
 
 
-//--------route handler----------------------
 
+//--------route handler----------------------
+app.get("/", (req, res, next) => {
+    return res.render('home')
+})
 app.use('/auth', authRoute, errorMiddleware);
 app.use("/house", houseRoute, errorMiddleware);
 app.use("/complain", complainRoute, errorMiddleware);
