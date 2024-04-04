@@ -6,6 +6,7 @@ const { mongoose } = require('mongoose');
 
 const authMiddleware = async (req, res, next) => {
     try {
+        // console.log(req.cookies['Authorization'], "<-----------cookies----------------", req.header("Authorization"), "<--------------header ------------->");
         const Authorization = req.cookies['Authorization'] || (req.header('Authorization') ? req.header('Authorization').split('Bearer ')[1] : null);
 
         if (Authorization) {

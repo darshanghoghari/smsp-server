@@ -22,7 +22,7 @@ const houseSchema = new mongoose.Schema({
     },
     houseOnSale: {
         type: Boolean,
-        default: false
+        default: true
     },
     houseFloorCount: {
         type: Number,
@@ -39,6 +39,10 @@ const houseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         default: null
+    },
+    adminUserId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 }, { timestamps: true, versionKey: false });
 

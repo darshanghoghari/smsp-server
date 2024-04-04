@@ -29,7 +29,7 @@ const updateHouseDetail = async (req, res, next) => {
         const houseData = req.body;
         const userData = req.user;
 
-        const data = await houseService.updateHouseDetail(houseId, houseData, userData);
+        const data = await houseService.updateHouseDetails(houseId, houseData, userData);
 
         res.json({ status: 200, message: 'House Detail Update successfully', data });
 
@@ -42,7 +42,7 @@ const deleteHouseDetail = async (req, res, next) => {
         const houseId = req.params.houseId;
         const userData = req.user;
 
-        const data = await houseService.deleteHouseDetail(houseId, userData);
+        const data = await houseService.deleteHouseDetails(houseId, userData);
 
         res.json({ status: 200, message: 'House Detail Deleted successfully', data })
     } catch (error) {

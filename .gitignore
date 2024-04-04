@@ -128,3 +128,20 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore image files
+.png
+.jpg
+.jpeg
+.gif
+.bmp
+.svg
+
+# Ignore video files
+.mp4
+.avi
+.mov
+.mkv
+.wmv
+.flv
+.webm

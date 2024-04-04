@@ -17,7 +17,6 @@ const createHouse = {
 
 const updateHouse = {
     body: Joi.object({
-        houseNo: Joi.string().optional(),
         houseType: Joi.string().optional(),
         houseSellPrice: Joi.number().optional().empty(0),
         houseOnRateMoney: Joi.number().optional().empty(0),
