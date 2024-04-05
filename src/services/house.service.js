@@ -46,8 +46,8 @@ const updateHouseDetails = async (houseId, houseData, userData) => {
 
 const deleteHouseDetails = async (houseId, userData) => {
 
-    const isAdmin = await userModel.findOne({ _id: userData._id });
-    if (isAdmin.userType !== "Admin") throw HttpException(409, 'Unauthorized to Remove HouseDetails')
+    const isAdmin = await userModel.findOne({ _id: userData._id, userType: "Admin" });
+    if (!isAdmin) throw HttpException(409, 'Unauthorized to Remove HouseDetails')
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
     const deletedCollectionData = await houseModel.findOneAndDelete({ _id: houseDetailId }, { new: true });

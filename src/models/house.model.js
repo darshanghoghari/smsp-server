@@ -15,7 +15,7 @@ const houseSchema = new mongoose.Schema({
         default: 0,
         trim: true,
     },
-    houseOnRateMoney: {
+    houseOnRantMoney: {
         type: Number,
         default: 0,
         trim: true,

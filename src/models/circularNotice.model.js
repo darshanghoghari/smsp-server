@@ -13,6 +13,10 @@ const circularSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    circularNoticeImage: {
+        type: String,
+        default: ''
+    },
     issuedBy: {
         type: mongoose.Types.ObjectId,
         ref: 'User'

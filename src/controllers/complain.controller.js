@@ -5,6 +5,7 @@ const addComplainDetail = async (req, res, next) => {
         const userData = req.user;
         const complainData = req.body;
 
+        complainData.proofAttachment = req.file?.path;
         const data = await complainServices.createComplain(complainData, userData);
 
         res.json({ status: 200, message: 'Complain Added successfully', data });

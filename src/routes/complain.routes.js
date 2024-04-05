@@ -4,9 +4,9 @@ const { validate } = require('express-validation');
 const authMiddleware = require('../middlewares/tokenVerify.middleware');
 const { createComplain, complainId, updateComplain } = require('../validations/complain.validation');
 const complainController = require('../controllers/complain.controller')
+const { upload } = require('../middlewares/multer.middleware');
 
-
-router.post('/add', authMiddleware, validate(createComplain), complainController.addComplainDetail);
+router.post('/add', upload.single('proofAttachment'), authMiddleware, validate(createComplain), complainController.addComplainDetail);
 router.get('/getDetail', authMiddleware, complainController.getComplaintDetail);
 router.put('/update/:complainId', authMiddleware, validate(complainId), validate(updateComplain), complainController.updateComplaint);
 router.delete('/delete/:complainId', authMiddleware, validate(complainId), complainController.deleteComplaint);
