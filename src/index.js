@@ -33,7 +33,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./src/views"));
 app.use(cookieParser());
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN || true,
     credentials: true
 };
 app.use(cors(corsOptions));
