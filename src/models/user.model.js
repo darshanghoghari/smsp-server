@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
         default: '',
         trim: true,
     },
+    onCloudinaryLink: {
+        type: String,
+        default: '',
+        trim: true
+    },
     isActive: {
         type: Boolean,
         default: false

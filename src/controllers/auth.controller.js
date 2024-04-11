@@ -1,21 +1,8 @@
-const { HttpException } = require('../exceptions/HttpsException');
 const authService = require('../services/auth.service');
-// const { uploadOnCloudinary } = require('../utils/cloudinary.util');
 
 const signupUser = async (req, res, next) => {
     try {
         const user = req.body;
-
-        //implement pending on cludinary
-        // //Image management store in local and cloud ....
-        // const imageProof = user?.photoProof?.path;
-        // // if (!imageProof) throw HttpException(404, "please upload a image");
-
-        // const idProof = await uploadOnCloudinary(imageProof)
-        // if (!idProof) throw HttpException(404, 'Upload valid Image.... ');
-
-        // user.photoProof = idProof;
-
         user.photoProof = req.file?.path;
         const data = await authService.createUser(user);
 
