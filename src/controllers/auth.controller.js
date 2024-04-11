@@ -3,10 +3,10 @@ const authService = require('../services/auth.service');
 const signupUser = async (req, res, next) => {
     try {
         const user = req.body;
-
+        user.photoProof = req.file?.path;
         const data = await authService.createUser(user);
 
-        res.json({ status: 200, message: 'User created successfully', data });
+        res.json({ status: 200, message: 'User Added successfully', data });
     } catch (error) {
         next(error)
     }

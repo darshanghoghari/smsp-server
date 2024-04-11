@@ -5,31 +5,49 @@ const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true,
+        trim: true,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        trim: true,
     },
     password: {
         type: String,
         required: true,
+        trim: true,
     },
     contactNo: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        trim: true,
     },
     userType: {
         type: String,
         enum: ['User', 'Admin', 'Tenant'],
         default: 'User'
     },
+    photoProof: {
+        type: String,
+        default: '',
+        trim: true,
+    },
+    onCloudinaryLink: {
+        type: String,
+        default: '',
+        trim: true
+    },
     isActive: {
         type: Boolean,
         default: false
     },
     isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    isAccess: {
         type: Boolean,
         default: false
     }

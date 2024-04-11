@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const houseSchema = new mongoose.Schema({
     houseNo: {
         type: String, // prefix houseNo with 'HN-'
-        required: true
+        required: true,
+        trim: true,
     },
     houseType: {
         type: String,
@@ -11,20 +12,23 @@ const houseSchema = new mongoose.Schema({
     },
     houseSellPrice: {
         type: Number,
-        default: 0
+        default: 0,
+        trim: true,
     },
-    houseOnRateMoney: {
+    houseOnRantMoney: {
         type: Number,
-        default: 0
+        default: 0,
+        trim: true,
     },
     houseOnSale: {
         type: Boolean,
-        default: false
+        default: true
     },
     houseFloorCount: {
         type: Number,
         min: 1,
-        default: 1
+        default: 1,
+        trim: true,
     },
     houseOwnerUserId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -35,6 +39,10 @@ const houseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         default: null
+    },
+    adminUserId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 }, { timestamps: true, versionKey: false });
 
