@@ -45,7 +45,7 @@ const loginUser = async (user) => {
         }
         const updateUserData = await User.findByIdAndUpdate({ _id: userDetail._id, isDelete: false, isAccess: true }, { $set: { isActive: true } }, { new: true })
         const token = createToken(updateUserData);
-        const userDataAndTokenData = { user: userDetail.email, token: token };
+        const userDataAndTokenData = { user: updateUserData, token: token };
         return userDataAndTokenData;
     }
 }
