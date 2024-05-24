@@ -21,6 +21,16 @@ const complainSchema = new mongoose.Schema({
     proofAttachment: {
         type: String,
         default: ''
+    },
+    onCloudinaryLink: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    cloudPublicId: {
+        type: String,
+        default: '',
+        trim: true
     }
 }, { timestamps: true, versionKey: false });
 

@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ['User', 'Admin', 'Tenant'],
+        enum: ['User', 'Admin', 'Tenant', 'Owner'],
         default: 'User'
     },
     photoProof: {

@@ -8,7 +8,7 @@ const { upload } = require('../middlewares/multer.middleware');
 
 router.post('/add', upload.single('proofAttachment'), authMiddleware, validate(createComplain), complainController.addComplainDetail);
 router.get('/getDetail', authMiddleware, complainController.getComplaintDetail);
-router.put('/update/:complainId', authMiddleware, validate(complainId), validate(updateComplain), complainController.updateComplaint);
+router.put('/update/:complainId', upload.single('proofAttachment'), authMiddleware, validate(complainId), validate(updateComplain), complainController.updateComplaint);
 router.delete('/delete/:complainId', authMiddleware, validate(complainId), complainController.deleteComplaint);
 
 module.exports = router

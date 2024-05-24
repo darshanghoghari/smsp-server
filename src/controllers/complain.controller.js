@@ -30,6 +30,7 @@ const updateComplaint = async (req, res, next) => {
     try {
         const complainId = req.params.complainId;
         const complainData = req.body;
+        complainData.proofAttachment = req.file?.path;
 
         const data = await complainServices.updateComplainDetail(complainId, complainData);
 

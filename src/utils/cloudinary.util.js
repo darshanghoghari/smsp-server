@@ -11,6 +11,9 @@ cloudinary.config({
 
 // Function to upload an image to Cloudinary
 const uploadImage = (filePath) => {
+    if (!filePath) {
+        return;
+    }
     const filename = path.basename(filePath);
     const folderName = 'Smsp Image Folder';
     return new Promise((resolve, reject) => {
@@ -24,36 +27,17 @@ const uploadImage = (filePath) => {
     });
 };
 
-// Function to upload a video to Cloudinary
-// const uploadVideo = (filePath) => {
-//     return new Promise((resolve, reject) => {
-//         cloudinary.uploader.upload(filePath, { public_id: `${folderName}/${filename}` }, { resource_type: 'video' }, (error, result) => {
-//             if (error) {
-//                 reject(error);
-//             } else {
-//                 resolve(result);
-//             }
-//         });
-//     });
-// };
+// Function to delete an image from Cloudinary
+const deleteImage = (publicId) => {
+    return new Promise((resolve, reject) => {
+        cloudinary.uploader.destroy(publicId, (error, result) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
 
-// Usage examples
-
-// uploadImage(imageFilePath)
-//     .then((result) => {
-//         console.log('Image uploaded successfully:', result);
-//     })
-//     .catch((error) => {
-//         console.error('Error uploading image:', error);
-//     });
-
-// uploadVideo(videoFilePath)
-//     .then((result) => {
-//         console.log('Video uploaded successfully:', result);
-//     })
-//     .catch((error) => {
-//         console.error('Error uploading video:', error);
-//     });
-
-
-module.exports = { uploadImage }
+module.exports = { uploadImage, deleteImage }
