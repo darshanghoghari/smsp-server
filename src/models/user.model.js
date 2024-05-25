@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
+    cloudPublicId: {
+        type: String,
+        default: '',
+        trim: true
+    },
     isActive: {
         type: Boolean,
         default: false
