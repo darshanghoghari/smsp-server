@@ -32,7 +32,7 @@ const editProfile = async (req, res, next) => {
         const profileData = req.body;
 
         profileData.photoProof = req.file?.path;
-        
+
         const data = await profileService.editProfileService(userData, userId, profileData);
 
         res.json({ status: 200, message: 'Profile Edited successfully', data });
@@ -43,12 +43,11 @@ const editProfile = async (req, res, next) => {
 const deleteProfile = async (req, res, next) => {
     try {
         const userData = req.user;
-        const profileData = req.body;
+        const userId = req.params.userId;
 
-        profileData.photoProof = req.file?.path;
-        const data = await complainServices.getProfile(complainData, userData);
+        const data = await profileService.deleteProfileService(userId, userData);
 
-        res.json({ status: 200, message: 'Complain Added successfully', data });
+        res.json({ status: 200, message: 'Profile Deleted successfully', data });
     } catch (error) {
         next(error)
     }

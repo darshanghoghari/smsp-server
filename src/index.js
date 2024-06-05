@@ -63,11 +63,3 @@ app.listen(port, () => {
     logger.info(`Database on Running`);
     logger.info(`=================================`);
 })
-
-
-
-// databaseConnection.then(() => {
-//     app.listen(port, () => {
-//         console.log(`Server Running On `);
-//     })
-// });

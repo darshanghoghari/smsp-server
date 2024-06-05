@@ -9,7 +9,7 @@ const getProfileByIdService = async (userData, userId) => {
 
     if (userData._id == userId || userData.userType === 'Admin') {
 
-        const getCollectionData = await User.findOne({ _id: new mongoose.Types.ObjectId(userId) });
+        const getCollectionData = await User.findOne({ _id: new mongoose.Types.ObjectId(userId), isDeleted: false });
 
         return getCollectionData;
     }
@@ -64,8 +64,19 @@ const editProfileService = async (userData, userId, profileData) => {
     }
 }
 
-const deleteProfileService = async () => {
+const deleteProfileService = async (userId, userData) => {
+    if (userData.userType === 'Admin') {
 
+        const deletedCollection = await User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(userId), isDeleted: false }, { isDeleted: true }, { new: true });
+
+        if (!deletedCollection) {
+            throw HttpException(409, "User Doesn't Existing.....")
+        }
+        return deletedCollection;
+    }
+    else {
+        throw HttpException(401, "Unauthorized To Access....")
+    }
 }
 
 module.exports = { getProfileByIdService, getAllProfileService, editProfileService, deleteProfileService }
