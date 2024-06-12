@@ -17,6 +17,16 @@ const circularSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    onCloudinaryLink: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    cloudPublicId: {
+        type: String,
+        default: '',
+        trim: true
+    },
     issuedBy: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
