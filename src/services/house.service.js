@@ -27,7 +27,7 @@ const createHouseDetail = async (houseData, userData) => {
 
 const getAllHouseDetails = async () => {
 
-    const collectionData = await houseModel.find().sort({ createdAt: -1 });
+    const collectionData = await houseModel.find();
 
     return collectionData;
 }

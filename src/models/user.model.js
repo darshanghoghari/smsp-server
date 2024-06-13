@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ['User', 'Admin', 'Tenant'],
+        enum: ['User', 'Admin', 'Tenant', 'Owner'],
         default: 'User'
     },
     photoProof: {
@@ -39,9 +39,14 @@ const userSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
+    cloudPublicId: {
+        type: String,
+        default: '',
+        trim: true
+    },
     isActive: {
         type: Boolean,
-        default: false
+        default: true
     },
     isDeleted: {
         type: Boolean,
