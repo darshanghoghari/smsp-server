@@ -2,7 +2,6 @@ const authService = require('../services/auth.service');
 
 const signupUser = async (req, res, next) => {
     try {
-        console.log("<-------auth log ------------->")
         const user = req.body;
         user.photoProof = req.file?.path;
         const data = await authService.createUser(user);

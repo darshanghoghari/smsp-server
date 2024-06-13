@@ -22,7 +22,7 @@ const getProfileByIdService = async (userData, userId) => {
 const getAllProfileService = async (userData) => {
     if (userData.userType === 'Admin') {
 
-        const getCollectionData = await User.find();
+        const getCollectionData = await User.find({ isDeleted: false });
 
         return getCollectionData;
     }
