@@ -4,7 +4,9 @@ const addCircularNoticeDetail = async (req, res, next) => {
     try {
         const userData = req.user;
         const circularNoticeData = req.body;
+
         circularNoticeData.userId = userData._id;
+        circularNoticeData.circularNoticeImage = req.file?.path;
 
         const data = await circularNoticeService.createCircularNotice(circularNoticeData);
 
@@ -19,7 +21,7 @@ const getCircularNoticeDetail = async (req, res, next) => {
     try {
         const data = await circularNoticeService.getCircularNotice();
 
-        res.json({ status: 200, message: 'Circular Notice Added successfully', data });
+        res.json({ status: 200, message: 'Circular Notice Get successfully', data });
 
     } catch (error) {
         next(error)
@@ -30,8 +32,10 @@ const updateCircularNoticeDetail = async (req, res, next) => {
     try {
         const circularNoticeId = req.params.circularNoticeId;
         const circularNoticeData = req.body;
+        const userData = req.user;
 
-        const data = await circularNoticeService.updateCircularNotice(circularNoticeId, circularNoticeData);
+        circularNoticeData.circularNoticeImage = req.file?.path;
+        const data = await circularNoticeService.updateCircularNotice(circularNoticeId, circularNoticeData, userData);
 
         res.json({ status: 200, message: 'Circular Notice update successfully', data });
 

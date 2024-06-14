@@ -24,20 +24,3 @@ const databaseConnection = async () => {
 };
 
 module.exports = databaseConnection;
-
-// require('dotenv').config();
-// const mongoose = require('mongoose');
-// const { logger } = require('../utils/logger.util');
-
-// const url = process.env.MONGODB_URL
-
-
-// const databaseConnection = mongoose.connect(url)
-//     .then(() => {
-//         console.log('Database Connected');
-//     })
-//     .catch((e) => {
-//         console.log(e);
-//     })
-
-// module.exports = databaseConnection;
