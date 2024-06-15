@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const clubBookingSchema = new mongoose.Schema({
 
     clubBookingDate: {
-        type: Date || String,
-        required: true
+        type: String,
+        required: ''
     },
     clubBookingTitle: {
         type: String,
@@ -27,8 +27,8 @@ const clubBookingSchema = new mongoose.Schema({
         default: false
     },
     alternativeDate: {
-        type: Date || String,
-        default: null
+        type: String,
+        default: ''
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

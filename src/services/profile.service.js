@@ -32,6 +32,7 @@ const getAllProfileService = async (userData) => {
     }
 }
 const editProfileService = async (userData, userId, profileData) => {
+    const uId = new mongoose.Types.ObjectId(userId);
     if (userData._id == userId || userData.userType === 'Admin') {
 
         const getCollectionData = await User.findOne({ _id: new mongoose.Types.ObjectId(userId) });

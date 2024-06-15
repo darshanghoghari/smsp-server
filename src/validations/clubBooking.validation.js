@@ -8,7 +8,9 @@ const createClubBooking = {
         clubBookingTitle: Joi.string().required(),
         clubBookingDescription: Joi.string().optional(),
         clubBookingRequestRent: Joi.number().optional(),
-
+        clubBookingNoteByAdmin: Joi.string().optional(),
+        isBooked: Joi.boolean().optional(),
+        alternativeDate: Joi.string().optional()
     })
 }
 
@@ -18,7 +20,9 @@ const updateClubBooking = {
         clubBookingTitle: Joi.string().optional(),
         clubBookingDescription: Joi.string().optional(),
         clubBookingRequestRent: Joi.number().optional(),
-
+        clubBookingNoteByAdmin: Joi.string().optional(),
+        isBooked: Joi.boolean().optional(),
+        alternativeDate: Joi.string().optional()
     })
 }
 
@@ -29,3 +33,36 @@ const clubBookingId = {
 }
 
 module.exports = { createClubBooking, updateClubBooking, clubBookingId }
+
+/*
+clubBookingDate: {
+        type: Date || String,
+        required: true
+    },
+    clubBookingTitle: {
+        type: String,
+        required: true
+    },
+    clubBookingDescription: {
+        type: String,
+        default: ''
+    },
+    clubBookingRequestRent: {
+        type: Number,
+        default: 0
+    },
+    clubBookingNoteByAdmin: {
+        type: String,
+        default: ''
+    },
+    isBooked: {
+        type: Boolean,
+        default: false
+    },
+    alternativeDate: {
+        type: Date || String,
+        default: null
+    }
+
+
+*/

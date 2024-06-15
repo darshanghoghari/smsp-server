@@ -1,6 +1,7 @@
 const circularNoticeModel = require('../models/circularNotice.model');
 const { HttpException } = require('../exceptions/HttpsException');
-const { uploadImage } = require('../utils/cloudinary.util');
+const { uploadImage, deleteImage } = require('../utils/cloudinary.util');
+const { mongoose } = require('mongoose');
 
 const createCircularNotice = async (circularNoticeData) => {
 
@@ -22,8 +23,7 @@ const getCircularNotice = async () => {
     return collectionData;
 }
 const updateCircularNotice = async (circularNoticeId, circularNoticeData, userData) => {
-    // if (userData.userType === 'Admin') {
-
+    if (userData.userType === 'Admin') {
         const getCollectionData = await circularNoticeModel.findOne({ _id: new mongoose.Types.ObjectId(circularNoticeId) });
 
         if (!getCollectionData) throw HttpException(409, "No Data Found");
@@ -42,21 +42,25 @@ const updateCircularNotice = async (circularNoticeId, circularNoticeData, userDa
             circularNoticeData.cloudPublicId = await cloudImageLink?.public_id;
         }
 
-        const updatedCollection = await User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(circularNoticeId) }, { ...circularNoticeData }, { new: true });
+        const updatedCollection = await circularNoticeModel.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(circularNoticeId) }, { ...circularNoticeData }, { new: true });
 
         if (!updatedCollection) throw HttpException(409, "Profile Data Not Updated");
 
         return updatedCollection;
-    // }
-    // else {
+    }
+    else {
 
-    //     throw HttpException(401, "Unauthorized To Access....")
-    // }
+        throw HttpException(401, "Unauthorized To Access....")
+    }
 }
 const deleteCircularNotice = async (circularNoticeId) => {
     const deletedCollectionData = await circularNoticeModel.findOneAndDelete({ _id: circularNoticeId }, { new: true });
 
     if (!deletedCollectionData) new HttpException(405, 'circular notice not deleted');
+
+    const oldImagePublicId = deletedCollectionData.cloudPublicId;
+
+    await deleteImage(oldImagePublicId);
 
     return deletedCollectionData;
 }

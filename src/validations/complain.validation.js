@@ -6,6 +6,8 @@ const createComplain = {
     body: Joi.object({
         complainTitle: Joi.string().required(),
         complainDescription: Joi.string().required(),
+        proofAttachment: Joi.string().optional(),
+        isResolved: Joi.boolean().optional(),
         proofAttachment: Joi.string().optional()
     })
 }

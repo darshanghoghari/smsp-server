@@ -6,16 +6,17 @@ const { uploadImage, deleteImage } = require('../utils/cloudinary.util');
 const createComplain = async (complainData, userData) => {
     complainData.complainedBy = userData._id;
 
-    //upload on cloudinary  and get image url to save it into the database
-    const cloudImageLink = await uploadImage(complainData?.proofAttachment);
+    if (complainData.proofAttachment) {
 
-    console.log(cloudImageLink, "<------------------------>")
+        //upload on cloudinary  and get image url to save it into the database
+        const cloudImageLink = await uploadImage(complainData?.proofAttachment);
 
-    if (cloudImageLink) {
-        complainData.onCloudinaryLink = await cloudImageLink?.secure_url;
-        complainData.cloudPublicId = await cloudImageLink?.public_id;
+        if (cloudImageLink) {
+            complainData.onCloudinaryLink = await cloudImageLink?.secure_url;
+            complainData.cloudPublicId = await cloudImageLink?.public_id;
+        }
+
     }
-
     const newComplainDetail = new complainModel(complainData);
     const collectionData = await newComplainDetail.save();
 
@@ -36,10 +37,10 @@ const updateComplainDetail = async (complainId, complainData) => {
     if (!findCollection) throw HttpException(409, "No Data Found");
     if (complainData.proofAttachment !== findCollection.onCloudinaryLink && complainData.proofAttachment !== undefined && complainData.proofAttachment !== null) {
 
-
         const oldImagePublicId = findCollection.cloudPublicId;
-
-        await deleteImage(oldImagePublicId);
+        if (oldImagePublicId) {
+            await deleteImage(oldImagePublicId);
+        }
 
         const cloudImageLink = await uploadImage(complainData?.proofAttachment);
         complainData.onCloudinaryLink = await cloudImageLink?.secure_url;
@@ -61,7 +62,10 @@ const deleteComplainDetail = async (complainId) => {
 
     const oldImagePublicId = deletedCollectionData.cloudPublicId;
 
-    await deleteImage(oldImagePublicId);
+    if (oldImagePublicId) {
+        await deleteImage(oldImagePublicId);
+    }
+
 
     return deletedCollectionData;
 }
