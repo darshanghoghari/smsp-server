@@ -4,7 +4,7 @@ const clubBookingSchema = new mongoose.Schema({
 
     clubBookingDate: {
         type: String,
-        required: ''
+        required: true
     },
     clubBookingTitle: {
         type: String,

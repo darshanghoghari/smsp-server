@@ -23,6 +23,18 @@ const getHouseDetail = async (req, res, next) => {
         next(error)
     }
 }
+
+const getHouseDetailByUsersId = async (req, res, next) => {
+    try {
+        const userData = req.user;
+
+        const data = await houseService.getHouseDetailsByUserId(userData);
+
+        res.json({ status: 200, message: 'Fetch House Detail successfully', data });
+    } catch (error) {
+        next(error)
+    }
+}
 const updateHouseDetail = async (req, res, next) => {
     try {
         const houseId = req.params.houseId;
@@ -50,4 +62,4 @@ const deleteHouseDetail = async (req, res, next) => {
     }
 }
 
-module.exports = { addHouseDetail, getHouseDetail, updateHouseDetail, deleteHouseDetail }
+module.exports = { addHouseDetail, getHouseDetail, getHouseDetailByUsersId, updateHouseDetail, deleteHouseDetail }

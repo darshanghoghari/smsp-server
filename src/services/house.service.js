@@ -1,6 +1,6 @@
 const { mongoose } = require('mongoose');
 const houseModel = require('../models/house.model');
-const userModel = require('../models/user.model');
+const User = require('../models/user.model');
 const { HttpException } = require('../exceptions/HttpsException');
 
 
@@ -32,6 +32,13 @@ const getAllHouseDetails = async () => {
     return collectionData;
 }
 
+const getHouseDetailsByUserId = async (userData) => {
+
+    const collectionData = await houseModel.findOne({ houseOwnerUserId: userData._id });
+
+    return collectionData;
+}
+
 const updateHouseDetails = async (houseId, houseData, userData) => {
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
@@ -57,4 +64,4 @@ const deleteHouseDetails = async (houseId, userData) => {
         return deletedCollectionData;
     }
 }
-module.exports = { createHouseDetail, getAllHouseDetails, updateHouseDetails, deleteHouseDetails }
+module.exports = { createHouseDetail, getAllHouseDetails, getHouseDetailsByUserId, updateHouseDetails, deleteHouseDetails }

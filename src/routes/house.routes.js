@@ -8,6 +8,7 @@ const authMiddleware = require('../middlewares/tokenVerify.middleware');
 
 router.post('/add', authMiddleware, validate(createHouse), houseController.addHouseDetail);
 router.get('/getDetail', authMiddleware, houseController.getHouseDetail);
+router.get('/getDetailByUsersId', authMiddleware, houseController.getHouseDetailByUsersId);
 router.put('/update/:houseId', authMiddleware, validate(houseId), validate(updateHouse), houseController.updateHouseDetail);
 router.delete('/delete/:houseId', authMiddleware, validate(houseId), houseController.deleteHouseDetail);
 
