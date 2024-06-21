@@ -8,7 +8,8 @@ const houseSchema = new mongoose.Schema({
     },
     houseType: {
         type: String,
-        enum: ['1BHK', '2BHK']
+        enum: ['1BHK', '2BHK'],
+        default: '1BHK'
     },
     houseSellPrice: {
         type: Number,

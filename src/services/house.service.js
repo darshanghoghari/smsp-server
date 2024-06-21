@@ -6,7 +6,10 @@ const { HttpException } = require('../exceptions/HttpsException');
 
 const createHouseDetail = async (houseData, userData) => {
 
-    const isAdmin = await userModel.findOne({ _id: userData._id, userType: 'Admin' });
+    console.log(userData, "<------------------------>");
+    const isAdmin = await User.findOne({ _id: userData._id, userType: 'Admin' });
+    console.log(isAdmin, "<------------------------>");
+
     if (!isAdmin) throw HttpException(409, 'Unauthorized to Add HouseDetails')
 
     const houseDetailExist = await houseModel.findOne({ houseNo: houseData.houseNo });
@@ -42,7 +45,8 @@ const getHouseDetailsByUserId = async (userData) => {
 const updateHouseDetails = async (houseId, houseData, userData) => {
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
-    const updatedCollectionData = await houseModel.findOneAndUpdate({ $or: [{ _id: houseDetailId }, { adminUserId: userData._id }, { houseOwnerUserId: userData._id }] }, { ...houseData }, { new: true });
+
+    const updatedCollectionData = await houseModel.findOneAndUpdate({ _id: houseDetailId }, { ...houseData }, { new: true });
     if (!updatedCollectionData) {
         throw HttpException(409, 'House Detail Not Updated');
     }
@@ -53,7 +57,7 @@ const updateHouseDetails = async (houseId, houseData, userData) => {
 
 const deleteHouseDetails = async (houseId, userData) => {
 
-    const isAdmin = await userModel.findOne({ _id: userData._id, userType: "Admin" });
+    const isAdmin = await User.findOne({ _id: userData._id, userType: "Admin" });
     if (!isAdmin) throw HttpException(409, 'Unauthorized to Remove HouseDetails')
 
     const houseDetailId = new mongoose.Types.ObjectId(houseId);
