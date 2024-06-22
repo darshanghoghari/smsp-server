@@ -51,10 +51,6 @@ const userSchema = new mongoose.Schema({
     isDeleted: {
         type: Boolean,
         default: false
-    },
-    isAccess: {
-        type: Boolean,
-        default: false
     }
 }, { timestamps: true, versionKey: false })
 
